@@ -1,0 +1,43 @@
+# main에 푸시하면 검사를 돌리고, 통과하면 Cloudflare Workers(poketwin.com)에 배포해요.
+# 필요한 저장소 Secrets: CLOUDFLARE_API_TOKEN, VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, VITE_KAKAO_JS_KEY
+# Actions 탭에서 "Run workflow"로 직접 다시 배포할 수도 있어요.
+name: 배포
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 배포가 겹치면 먼저 시작한 것을 끝까지 마치고 다음 것을 이어서 해요.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+      VITE_KAKAO_JS_KEY: ${{ secrets.VITE_KAKAO_JS_KEY }}
+    steps:
+      # 설정값이 하나라도 빠지면 도감·카카오 공유가 빠진 사이트가 올라가니, 배포하지 않고 멈춰요.
+      - name: 설정값 확인
+        run: |
+          missing=0
+          for name in CLOUDFLARE_API_TOKEN VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY VITE_KAKAO_JS_KEY; do
+            if [ -z "${!name}" ]; then echo "::error::저장소 Secrets에 $name 이(가) 없어요"; missing=1; fi
+          done
+          exit $missing
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: 검사
+        run: npm test
+      # wrangler.jsonc의 build 설정대로 빌드(npm run build)한 뒤 배포해요.
+      - name: Cloudflare Workers 배포
+        run: npx wrangler deploy
