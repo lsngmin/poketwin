@@ -1,0 +1,178 @@
+/* 홈 포스터와 같은 언어: 잉크 테두리, 딱딱한 그림자, 굵은 제목 */
+.section.collection-page {
+  min-height: 75vh;
+  padding-top: 48px;
+}
+
+.cl-intro h1 {
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1.14;
+  letter-spacing: -.055em;
+}
+
+.cl-intro h1 em {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 0 .18em .06em;
+  border-radius: .28em;
+  background: #d7e386;
+  font-style: normal;
+  transform: rotate(-2deg);
+}
+
+.cl-intro p {
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.cl-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 520px;
+  height: 56px;
+  margin-top: 26px;
+  padding: 0 14px 0 16px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 0 var(--ink);
+  color: var(--ink);
+}
+
+.cl-search:focus-within { outline: 3px solid #8c6aeb; outline-offset: 3px; }
+
+.cl-search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.cl-search input::placeholder { color: #7b8476; font-weight: 500; }
+.cl-search input:focus-visible { outline: none; }
+
+.cl-search button {
+  display: flex;
+  padding: 4px;
+  background: none;
+  color: var(--ink);
+}
+
+.cl-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  padding-bottom: 4px;
+}
+
+.cl-filters button {
+  flex: none;
+  padding: 6px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 3px 0 var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform .08s, box-shadow .08s, background .2s;
+}
+
+.cl-filters button:hover { background: var(--lime); }
+
+/* 선택된 칩은 눌린 채로 둡니다. */
+.cl-filters button.active {
+  background: var(--ink);
+  color: var(--lime);
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.cl-count {
+  margin: 22px 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.cl-count strong { font-weight: 900; color: var(--ink); }
+
+.cl-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px 20px;
+}
+
+.cl-grid .pokemon-art { height: 190px; }
+.cl-grid .pokemon-art img { width: 190px; }
+
+.cl-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 20px;
+  border: 2px dashed #254b3d59;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.cl-empty h2 { font-size: 22px; font-weight: 900; letter-spacing: -.04em; }
+.cl-empty p { font-size: 15px; color: var(--muted); }
+
+.cl-reset {
+  margin-top: 6px;
+  padding: 11px 18px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--lime);
+  box-shadow: 0 4px 0 var(--ink);
+  font-size: 15px;
+  font-weight: 800;
+  transition: transform .08s, box-shadow .08s;
+}
+
+.cl-reset:active { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
+
+@media (max-width: 1000px) {
+  .cl-grid .pokemon-art { height: 150px; }
+  .cl-grid .pokemon-art img { width: 150px; }
+}
+
+@media (max-width: 700px) {
+  .section.collection-page { padding-top: 32px; }
+  .cl-intro h1 { font-size: 40px; }
+
+  /* 모바일은 타입 칩을 한 줄로 두고 옆으로 넘깁니다. */
+  .cl-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 18px -24px 0;
+    padding: 2px 24px 8px;
+    scrollbar-width: none;
+  }
+
+  .cl-filters::-webkit-scrollbar { display: none; }
+
+  .cl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 13px; }
+  .cl-grid .pokemon-art { height: auto; }
+  .cl-grid .pokemon-art img { width: 100%; }
+}
+
+@media (max-width: 380px) {
+  .cl-filters { margin-right: -19px; margin-left: -19px; padding-right: 19px; padding-left: 19px; }
+  .cl-intro h1 { font-size: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-filters button, .cl-reset { transition: none; }
+}

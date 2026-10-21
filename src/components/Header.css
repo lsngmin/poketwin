@@ -1,0 +1,13 @@
+/* Poomang reference: 56px header and 24px side padding. */
+.app-header{height:56px;position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #edf0f3}
+.header-inner{height:100%;max-width:1208px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;position:relative}
+.header-brand{display:block;position:relative;width:155px;height:24px;overflow:hidden;flex-shrink:0}
+.header-logo{position:absolute;width:168px;height:56px;max-width:none;left:-5.6px;top:-15.2px}
+.header-actions{display:flex;align-items:center;gap:16px;color:#52555a}
+.header-icon{display:inline-flex;align-items:center;justify-content:center;position:relative;padding:0;background:none;border:0;line-height:1;color:inherit}
+.header-icon:before{content:'';position:absolute;inset:-10px -7px}
+.header-icon:hover{color:var(--ink)}
+.header-menu{position:absolute;top:calc(100% + 8px);right:24px;width:200px;padding:8px;background:#fff;border:1px solid #edf0f3;border-radius:10px;box-shadow:0 8px 25px #243d3212}
+.header-menu:not([hidden]){display:grid;gap:2px}
+.header-menu a{padding:12px;border-radius:6px;font-size:14px;line-height:20px;color:#52555a}
+.header-menu a:hover,.header-menu a.active{background:#f2f6f0;color:var(--ink)}

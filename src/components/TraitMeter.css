@@ -1,0 +1,53 @@
+.trm-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.trm-head strong { font-weight: 900; }
+.trm-head span { font-size: 14px; font-weight: 800; color: var(--accent); }
+
+.trm-blocks {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.trm-blocks i {
+  flex: 1;
+  height: 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.trm-blocks i.on { background: var(--ink); }
+
+.trm-mid {
+  flex: none;
+  width: 2px;
+  height: 22px;
+  margin: 0 4px;
+  border-radius: 2px;
+  background: var(--ink);
+  opacity: .45;
+}
+
+.trm-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.trm.compact .trm-head { font-size: 13px; }
+.trm.compact .trm-head span { font-size: 13px; }
+.trm.compact .trm-blocks { gap: 3px; margin-top: 6px; }
+.trm.compact .trm-blocks i { height: 10px; border-radius: 3px; }
+.trm.compact .trm-mid { height: 16px; margin: 0 3px; }

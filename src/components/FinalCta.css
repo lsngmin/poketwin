@@ -1,0 +1,106 @@
+/* 히어로 포스터와 같은 언어를 진한 바탕에 뒤집어 써서 페이지를 마무리합니다. */
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  overflow: clip;
+  max-width: 1160px;
+  margin: 0 auto 80px;
+  padding: 34px 26px 32px;
+  border-radius: 24px;
+  background: var(--ink);
+  color: #fff;
+}
+
+.final-cta-mew {
+  position: absolute;
+  top: 6px;
+  right: -4px;
+  width: 116px;
+  height: auto;
+  transform: rotate(10deg);
+  pointer-events: none;
+}
+
+.final-cta-kicker {
+  position: relative;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--lime);
+}
+
+.final-cta h2 {
+  position: relative;
+  margin-top: 10px;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -.055em;
+}
+
+.final-cta h2 em {
+  font-style: normal;
+  color: var(--lime);
+}
+
+.final-cta-text {
+  position: relative;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ffffffcc;
+}
+
+.final-cta-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 334px;
+  height: 62px;
+  margin-top: 26px;
+  border: 2px solid #0d2219;
+  border-radius: 18px;
+  background: var(--lime);
+  color: var(--ink);
+  box-shadow: 0 6px 0 #0d2219;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  white-space: nowrap;
+  transition: transform .08s, box-shadow .08s, background .2s;
+}
+
+.final-cta-button:hover { background: #dde8a0; }
+.final-cta-button:active { transform: translateY(6px); box-shadow: 0 0 0 #0d2219; }
+
+@media (min-width: 701px) {
+  .final-cta { padding: 48px 56px 50px; }
+  .final-cta h2 { font-size: 68px; }
+  .final-cta-mew { top: 24px; right: 64px; width: 210px; }
+}
+
+@media (max-width: 1240px) {
+  .final-cta {
+    margin-right: 40px;
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .final-cta {
+    margin: 0 24px 45px;
+  }
+}
+
+@media (max-width: 360px) {
+  .final-cta { padding-right: 20px; padding-left: 20px; }
+  .final-cta h2 { font-size: 48px; }
+  .final-cta-mew { width: 96px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .final-cta-button { transition: none; }
+}

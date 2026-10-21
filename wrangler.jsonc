@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "poketwin",
+  "compatibility_date": "2026-10-20",
+  "workers_dev": true,
+  // 결과·포켓몬·도감 초대 주소에서만 링크 미리보기를 바꿔 넣어요(나머지는 정적 파일 그대로).
+  "main": "worker/index.ts",
+  "account_id": "e7923d55ffc214ca908b4ed98abc5650",
+  "build": {
+    "command": "npm run build"
+  },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/result", "/pokemon/*", "/t/*"]
+  }
+}

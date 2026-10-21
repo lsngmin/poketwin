@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8"/>
+    <!-- 도감 관리 링크의 비밀 값(# 뒤)은 분석 태그가 주소를 읽기 전에 옮기고 주소창에서 지워요. -->
+    <script>
+      (function () {
+        try {
+          if (/^\/t\/[^/]+\/manage\/?$/.test(location.pathname) && /^#[0-9a-f]{32}$/.test(location.hash)) {
+            sessionStorage.setItem('poketwin:manage-key', location.hash.slice(1));
+            history.replaceState(null, '', location.pathname);
+          }
+        } catch (e) { /* 저장소를 못 쓰면 # 뒤 값을 앱이 직접 읽어요. */ }
+      })();
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8CNY6V7DES"></script>
+    <script>
+      // 개발 서버(localhost)에서 확인한 기록이 실제 통계에 섞이지 않게 보내지 않아요.
+      if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) window['ga-disable-G-8CNY6V7DES'] = true;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // 페이지 조회는 앱이 답변값·도감 코드를 뺀 주소로 직접 보내요(src/lib/analytics.ts).
+      gtag('config', 'G-8CNY6V7DES', { send_page_view: false });
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <meta name="description" content="15개의 일상 질문 속에서 만나는 또 다른 나. 나와 닮은 포켓몬을 찾고, 친구와 결과를 나눠보세요."/>
+    <!-- 링크 미리보기 기본값. 결과·포켓몬·도감 초대 주소는 Cloudflare Worker가 주소에 맞게 바꿔요(worker/index.ts). -->
+    <meta property="og:site_name" content="포켓트윈"/>
+    <meta property="og:locale" content="ko_KR"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://poketwin.com/"/>
+    <meta property="og:title" content="포켓트윈 · 나와 닮은 포켓몬 찾기"/>
+    <meta property="og:description" content="피카츄일까, 잠만보일까? 2분이면 만나는 나의 포켓몬."/>
+    <meta property="og:image" content="https://poketwin.com/share/home.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="600"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="포켓트윈 · 나와 닮은 포켓몬 찾기"/>
+    <meta name="twitter:description" content="피카츄일까, 잠만보일까? 2분이면 만나는 나의 포켓몬."/>
+    <meta name="twitter:image" content="https://poketwin.com/share/home.png"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=poketwin-twins"/>
+    <!-- 휴대폰 공유 창·홈 화면에 보이는 아이콘. 없으면 브라우저 기본 그림이 떠요. -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <title>나와 닮은 포켓몬 찾기 · 포켓트윈</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

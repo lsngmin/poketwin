@@ -1,0 +1,38 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+*.log
+
+# Local environment
+.env
+.env.*
+
+# Local drafts, backups, and former deployment state
+.local/
+.openai/
+.sites-runtime/
+*.tar.gz
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Cloudflare local state and secrets
+.wrangler/
+.dev.vars
+.dev.vars.*
+
+# 저장소에 올리지 않는 내부 자료(DB 스키마·마이그레이션·운영 SQL, 기획·분석 문서)
+supabase/
+docs/
+
+# 이 앱의 로컬 개발 실행 설정(개인 환경)
+.claude/
+
+# 공유 그림 생성 도구(필요할 때 내 컴퓨터에서만 실행)
+scripts/share-images.py
+__pycache__/

@@ -1,0 +1,46 @@
+.share-apps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 340px;
+  margin: 22px auto 0;
+}
+
+.share-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background: none;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.share-app-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform .08s, box-shadow .08s;
+}
+
+.share-app:active .share-app-icon { transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
+.share-app.kakao .share-app-icon { background: #fee500; }
+.share-app.x .share-app-icon { background: #111; }
+.share-app.insta .share-app-icon { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+
+/* 링크 복사 · QR 버튼까지 다섯 칸이 한 줄에 들어가는 모양 */
+.share-apps.more { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; max-width: 400px; }
+.share-apps.more .share-app { gap: 7px; font-size: 12px; white-space: nowrap; }
+.share-apps.more .share-app-icon { width: 50px; height: 50px; }
+.share-app.plain .share-app-icon { background: #fff; color: var(--ink); }
+.share-app[aria-expanded="true"] .share-app-icon { background: var(--ink); color: var(--lime); transform: translateY(4px); box-shadow: 0 0 0 var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .share-app-icon { transition: none; }
+}

@@ -1,0 +1,224 @@
+/* 히어로 포스터와 같은 언어: 잉크 테두리, 딱딱한 그림자, 굵은 제목 */
+.quiz-preview h2 {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -.05em;
+}
+
+.qp-body {
+  margin-top: 26px;
+}
+
+.qp-question,
+.qp-result {
+  display: block;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  box-shadow: 0 6px 0 var(--ink);
+}
+
+.qp-question {
+  padding: 20px 18px 18px;
+  background: var(--sage, #f1f4e7);
+}
+
+.qp-scene {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--accent);
+}
+
+.qp-scene b {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--lime);
+}
+
+.qp-question h3 {
+  margin-top: 12px;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.38;
+  letter-spacing: -.04em;
+  white-space: pre-line;
+}
+
+.qp-options {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.qp-options a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 54px;
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 0 var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  word-break: keep-all;
+  transition: transform .08s, box-shadow .08s, background .2s;
+}
+
+.qp-options a:hover { background: var(--lime); }
+.qp-options a:active { transform: translateY(3px); box-shadow: 0 0 0 var(--ink); }
+
+.qp-options span {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  background: var(--lime);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.qp-hint {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.qp-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 22px 0 18px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.qp-connector::before {
+  content: '';
+  height: 22px;
+  border-left: 2px dashed var(--ink);
+  opacity: .35;
+}
+
+.qp-result {
+  padding: 18px;
+  background: var(--qp-color);
+  color: var(--ink);
+  transition: transform .08s, box-shadow .08s;
+}
+
+.qp-result:active { transform: translateY(6px); box-shadow: 0 0 0 var(--ink); }
+
+.qp-result-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qp-result-head > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.qp-badge {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.qp-result-head strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+
+.qp-result-head p {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.qp-result-head img {
+  flex-shrink: 0;
+  width: 112px;
+  height: auto;
+  margin: -8px -6px -8px 0;
+}
+
+.qp-traits {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.qp-partner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.qp-partner img {
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+}
+
+.qp-partner b { font-weight: 900; }
+.qp-more { margin-left: auto; flex-shrink: 0; }
+
+.qp-footnote {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+@media (min-width: 860px) {
+  .qp-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .qp-connector { margin: 0; text-align: center; }
+  .qp-connector::before { display: none; }
+  .qp-connector svg { transform: rotate(-90deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qp-options a, .qp-result { transition: none; }
+}
