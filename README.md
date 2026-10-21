@@ -1,116 +1,99 @@
-# POKETWIN · 포켓트윈
+<p align="center">
+  <img src="public/share/home.png" alt="포켓트윈 · 나랑 닮은 포켓몬은?" width="760">
+</p>
 
-15개의 일상 질문으로 나와 닮은 포켓몬을 찾는 한국어 성향 테스트입니다. React, TypeScript, Vite로 만들었으며, 선택적으로 Supabase를 연결해 친구들과 트레이너 팀을 만들 수 있습니다.
+<h1 align="center">포켓트윈 · POKETWIN</h1>
 
-## 시작하기
+<p align="center">
+  <b>15개의 질문으로 만나는 또 다른 나</b><br>
+  느긋한 잠만보부터 호기심 많은 이브이까지, 나와 꼭 닮은 포켓몬을 찾아보세요.
+</p>
 
-이 README와 `package.json`이 있는 폴더가 프로젝트 루트입니다. 이 폴더 전체를 원하는 위치로 옮기거나 이름을 변경해도 됩니다. 다른 폴더의 파일이나 특정 컴퓨터의 절대 경로를 참조하지 않습니다.
+<p align="center">
+  <a href="https://poketwin.com"><b>👉 poketwin.com 에서 바로 해보기</b></a>
+</p>
 
-Node.js 22.12 이상과 npm이 필요합니다.
+<br>
 
-```bash
-npm ci
-npm run dev
-```
+## 이런 서비스예요
 
-기본 개발 주소는 `http://localhost:5173`입니다. 폴더를 이동하기 전 실행 중인 서버를 종료하고, 이동한 폴더에서 다시 실행하세요. 다른 컴퓨터로 옮겼다면 `npm ci`로 의존성을 다시 설치하세요.
+쉬는 날을 보내는 방법, 친구의 고민을 듣는 순간, 여행을 준비하는 모습처럼 익숙한 일상 속 질문 15개에 답하면 32마리 포켓몬 중 나와 가장 닮은 친구를 찾아 줘요. 회원가입 없이 2분이면 충분해요.
 
-```bash
-npm test          # 매칭·파트너 참조·팀 궁합 검사
-npm run build     # TypeScript 검사와 프로덕션 빌드
-npm run preview   # 빌드한 dist 미리보기
-```
+<p align="center">
+  <img src="readme/screens.png" alt="홈, 질문, 결과, 포켓몬 도감 화면" width="900">
+</p>
 
-## 환경변수
+## 이렇게 즐겨요
 
-기본 성향 테스트와 포켓몬 도감은 환경변수 없이 사용할 수 있습니다. 트레이너 도감·카카오 공유를 쓰려면 프로젝트 루트에 `.env.local` 파일을 만들고 아래 변수를 `변수=값` 형식으로 한 줄씩 적으세요.
+### 1. 질문 15개에 답해요
 
-```bash
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-VITE_KAKAO_JS_KEY=
-```
+정답도, 더 좋은 성격도 없어요. 평소의 나를 떠올리며 가장 가까운 답을 골라 주세요. 중간에 그만둬도 다음에 이어서 풀 수 있어요.
 
-환경변수 변경 후에는 개발 서버를 다시 시작하고, 배포 시에는 다시 빌드해야 합니다.
+### 2. 나와 닮은 포켓몬을 만나요
 
-| 변수 | 용도 |
-| --- | --- |
-| `VITE_SUPABASE_URL` | 트레이너 도감을 저장할 Supabase 프로젝트 URL |
-| `VITE_SUPABASE_ANON_KEY` | Supabase 공개용 publishable/anon 키 |
-| `VITE_KAKAO_JS_KEY` | 카카오톡 공유용 JavaScript 키(공개 키, 카카오 콘솔에 도메인 등록 필요) |
+어떤 점이 닮았는지, 그 포켓몬다운 순간은 언제인지, 나에게 건네는 한마디까지 알려 줘요. 함께하면 좋은 **찰떡 파트너**와, 다르지만 그래서 재밌는 **티격태격 파트너**도 만나 보세요.
 
-`VITE_` 변수는 브라우저에 공개됩니다. Supabase secret/service_role 키 같은 비밀키를 넣지 마세요. `.env.local`은 Git에서 제외합니다.
+### 3. 친구에게 물어봐요
 
-## 주요 기능
+카카오톡, X, 인스타 스토리로 결과를 보내고 "너는 어떤 포켓몬일까?" 하고 물어보세요. 결과 카드를 그림으로 저장할 수도 있어요.
 
-- 15개 질문과 5개 성향 축으로 결정되는 32종 포켓몬 결과
-- 답변 이어 풀기, 이전 질문으로 돌아가기, 결과 URL 공유
-- 포켓몬별 상세 설명, 닮은 점, 한마디, 찰떡·티격태격 파트너
-- 검색과 타입 필터가 있는 포켓몬 도감
-- 결과 카드 PNG 저장, 모바일 레이아웃, 키보드 접근, 동작 감소 설정
-- Supabase 연결 시 트레이너 생성, 팀 초대와 참여, 팀원 간 궁합 비교
+<p align="center">
+  <img src="public/share/pokemon-25.png" alt="카카오톡으로 공유한 피카츄 결과 카드" width="560">
+</p>
 
-## 프로젝트 구조
+### 4. 친구들로 내 도감을 채워요
 
-```text
-.
-├── public/
-│   ├── brand/              # 로고
-│   ├── pokemon/            # 포켓몬 이미지
-│   ├── share/              # 공유·링크 미리보기 그림
-│   └── trainers/           # 트레이너 이미지
-├── scripts/                # 빌드 때 robots·sitemap·llms.txt 생성
-├── src/
-│   ├── components/         # 재사용 화면 구성 요소
-│   ├── data/               # 질문·포켓몬·트레이너 데이터
-│   ├── lib/                # 매칭·공유·저장·팀 기능과 테스트
-│   └── pages/              # 홈·질문·결과·도감·팀 페이지
-├── worker/                 # Cloudflare Worker(주소별 링크 미리보기)
-├── index.html
-├── package.json
-├── package-lock.json
-├── tsconfig.json
-├── vite.config.ts
-└── wrangler.jsonc          # Cloudflare Workers 배포 설정
-```
+트레이너가 되어 초대 링크나 QR 코드를 보내 보세요. 친구가 테스트를 마칠 때마다 친구의 포켓몬이 내 도감에 하나씩 등록돼요. 친구에게도 도감이 있다면 서로의 도감에 함께 들어가요.
 
-`node_modules/`, `dist/`, `.env.local`, `.local/`, `.claude/`, `docs/`, `supabase/`는 로컬 작업용이며 Git 업로드에서 제외합니다. 앱 실행에는 필요하지 않습니다.
+도감에 모인 친구 중 여섯 마리를 골라 **대표 파티**를 꾸리면, 우리 파티의 분위기와 찰떡·쌍둥이·정반대 같은 눈에 띄는 콤비를 알려 줘요. 두 사람을 골라 궁합도 비교해 보세요.
 
-## 트레이너 도감 기능
+<p align="center">
+  <img src="public/share/invite.png" alt="도감 초대장" width="560">
+</p>
 
-트레이너 도감은 Supabase 익명 로그인과 데이터베이스를 사용합니다. 기본 성향 테스트는 서버 없이 동작하며, 답변은 브라우저의 localStorage와 결과 URL로 복원합니다. Supabase 환경변수를 설정하지 않으면 도감 관련 진입 버튼은 표시하지 않습니다.
+## 다섯 가지 성향
 
-DB 스키마·마이그레이션(`supabase/`)과 운영 메모(`docs/`)는 저장소에 포함하지 않고 별도로 보관합니다.
+질문은 다섯 가지 성향을 세 개씩 살펴봐요. 다섯 성향이 각각 어느 쪽에 가까운지에 따라 32가지 조합이 생기고, 조합마다 포켓몬 한 마리가 짝지어져 있어요. 같은 답을 고르면 언제나 같은 포켓몬을 만나요.
 
-## 결과와 궁합
+<table>
+  <tr>
+    <td width="300" align="center"><img src="readme/traits.png" alt="결과 화면의 성향 지도" width="260"></td>
+    <td>
 
-질문은 에너지·호기심·마음의 방향·일상의 리듬·시작하는 방식 다섯 축에 각 3개씩 배정합니다. 선택지는 -2/-1/+1/+2점이며, 축별 점수의 부호로 5자리 코드를 만듭니다. 합계가 0인 축은 마지막 답변의 방향으로 결정하므로 같은 답변은 항상 같은 결과가 됩니다.
+| 성향 | 한쪽 | 다른 쪽 |
+| --- | --- | --- |
+| 에너지 | 차분한 충전 | 활발한 교류 |
+| 호기심 | 익숙한 안정 | 새로운 모험 |
+| 마음의 방향 | 명확한 해결 | 따뜻한 공감 |
+| 일상의 리듬 | 차근차근 계획 | 자유로운 흐름 |
+| 시작하는 방식 | 생각 먼저 | 행동 먼저 |
 
-성향 지도는 각 축의 점수를 0~100으로 정규화한 표시이며 진단 정확도나 백분위가 아닙니다. 찰떡·티격태격 파트너는 포켓트윈이 정한 창작 조합입니다. 팀원 간 궁합 점수는 실제 답변의 성향 점수 차이와 찰떡 파트너 보너스로 별도 계산합니다.
+결과 화면에서는 성향마다 내가 어느 쪽에, 얼마나 가까운지 함께 보여 줘요.
 
-결과 URL의 `a` 값에는 0~3으로 된 답변 15개가 담깁니다. 예전 12자리 링크도 열리며 대부분 기존 포켓몬을 유지하지만, 현재 호환 규칙에서는 루카리오가 괴력몬으로, 옛 뮤 결과가 폴리곤으로 이어집니다. 링크를 받은 사람도 이 선택 정보를 복원할 수 있습니다.
+</td>
+  </tr>
+</table>
 
-## GitHub 업로드와 배포
+## 32마리 친구들
 
-소스 저장소는 [lsngmin/poketwin](https://github.com/lsngmin/poketwin)입니다. GitHub 업로드 전에는 `git status`로 변경 내용을 확인하세요. `.gitignore`에 지정한 로컬 파일은 업로드에서 제외됩니다.
+<p align="center">
+  <img src="readme/pokemon.png" alt="포켓트윈에서 만날 수 있는 포켓몬 32마리" width="900">
+</p>
 
-배포는 아래 Cloudflare Workers 항목처럼 로컬에서 `npm run deploy`로 합니다. 다른 배포 서비스를 쓴다면 프로젝트 루트는 `.`, 빌드 명령은 `npm run build`, 출력 폴더는 `dist`로 지정하고 환경변수를 따로 설정하세요.
+<p align="center">
+  <a href="https://poketwin.com/collection">포켓몬 도감</a>에서 모두의 성향과 파트너를 둘러볼 수 있어요.
+</p>
 
-현재 이미지 경로는 `/pokemon/`, `/brand/`, `/trainers/`를 사용하므로 도메인의 루트에 배포하는 구성을 기준으로 합니다. GitHub에 소스를 올리는 것과 GitHub Pages에 배포하는 것은 별개이며, `/저장소명/` 하위 경로의 Pages 배포에는 경로 조정이 필요합니다. 페이지 이동에는 BrowserRouter를 사용하며, 기존 `#/` 링크는 새 경로로 자동 연결됩니다. Workers의 SPA fallback 설정으로 하위 경로 새로고침을 지원합니다.
+## 알려 드려요
 
-## 출처
+- 포켓트윈은 Pokémon 공식 서비스와 제휴하지 않은 **비공식 팬 프로젝트**예요. 테스트 결과는 게임의 공식 성격 설정, 능력치, 타입 상성과 관계가 없고, 성향 해석과 파트너 조합은 심리 진단이 아니에요.
+- Pokémon 및 관련 캐릭터의 권리는 Nintendo, Creatures, GAME FREAK 등 각 권리자에게 있어요.
+- 포켓몬 이미지는 [PokeAPI/sprites](https://github.com/PokeAPI/sprites)의 공식 아트워크를, 트레이너 이미지는 Bulbagarden Archives에 수록된 포켓몬스터 레츠고! 피카츄·레츠고! 이브이 공식 일러스트를 사용해요. 글꼴은 [Pretendard](https://github.com/orioncactus/pretendard)(SIL Open Font License)예요.
+- 어떤 정보를 저장하고 어떻게 지울 수 있는지는 [개인정보 처리방침](https://poketwin.com/privacy)에서 확인할 수 있어요.
 
-비공식 팬 프로젝트입니다. Pokémon 및 캐릭터의 권리는 각 권리자에게 있으며, 성향과 파트너 해석은 공식 설정이나 심리 진단이 아닙니다.
+<br>
 
-- 포켓몬 이미지: [PokeAPI/sprites](https://github.com/PokeAPI/sprites)의 official-artwork
-- 글꼴: Pretendard, SIL Open Font License
-
-광고는 넣지 않습니다. 방문 분석은 GA4만 사용하며, 보내는 이벤트는 `src/lib/analytics.ts`에 모여 있습니다.
-
-### Cloudflare Workers 배포
-
-`worker/index.ts`는 결과·포켓몬·도감 초대 주소(`/result`, `/pokemon/*`, `/t/*`)의 HTML에만 링크 미리보기(og:·twitter:)를 주소에 맞게 넣고, 나머지는 정적 파일을 그대로 보냅니다(`wrangler.jsonc`의 `run_worker_first`). 공유 그림(카카오·미리보기 1200×600, 인스타 스토리 1080×1920)은 `public/share`에 있습니다. 그림을 만드는 도구는 저장소에 포함하지 않고 따로 보관합니다.
-
-이 프로젝트 폴더에서 `npm run deploy`를 실행하면 빌드 후 기존 `poketwin` Worker에 배포합니다. `npm run deploy:check`로 배포 없이 확인하거나 `npm run preview:worker`로 로컬에서 확인할 수 있습니다. 최초 실행 시 Cloudflare 로그인이 필요합니다.
-
-Vite 환경변수는 빌드 시 포함되므로 이 폴더의 `.env.local`에 공개용 Supabase URL과 anon 키를 설정하세요. 서비스 역할 키 등 비밀 키는 `VITE_` 변수에 넣지 마세요.
+<p align="center">
+  <img src="public/brand/poketwin-logo-light.png" alt="POKETWIN" width="180"><br>
+  <sub>React · TypeScript · Vite · Supabase · Cloudflare Workers로 만들었어요</sub>
+</p>
