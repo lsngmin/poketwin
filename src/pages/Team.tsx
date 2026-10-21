@@ -7,7 +7,7 @@ import { pokemon } from '../data/pokemon';
 import { partyCombos, profileOf, toward, type Combo, type Profile } from '../lib/compat';
 import { matchPokemon } from '../lib/matching';
 import { clearAnswers, readAnswers } from '../lib/storage';
-import { deleteTeam, everyone, FRIEND_LIMIT, getTeam, inviteUrl, linkBack, myTeamCode, removeMember, setParty, setPendingJoin, TEAM_SIZE, teamEnabled, TeamError, teamParty, toggleSpecies, type Team as TeamData, type TeamMember } from '../lib/team';
+import { deleteTeam, everyone, FRIEND_LIMIT, getTeam, inviteUrl, linkBack, myTeamCode, rememberInvite, removeMember, setParty, setPendingJoin, TEAM_SIZE, teamEnabled, TeamError, teamParty, toggleSpecies, type Team as TeamData, type TeamMember } from '../lib/team';
 import { LostPage } from '../components/LostPage';
 import { TrainerCard } from '../components/TrainerCard';
 import { PartyVibe } from '../components/PartyVibe';
@@ -241,6 +241,9 @@ function ComboLink({ code, combo }: { code: string; combo: Combo }) {
 function TeamInvite({ team }: { team: TeamData }) {
   // 초대 링크로 들어온 사람 수(초대 → 등록 전환율의 분모)
   useEffect(() => { track('dex_invite_view', {}); }, []);
+  // 내 도감이 없는 사람은 초대장을 여는 순간 이 도감을 기억해요. 어느 길로 테스트하든 끝나면 이 도감에 등록돼요.
+  // 자리가 가득 찬 도감은 기억하지 않아요.
+  useEffect(() => { if (!myTeamCode() && team.members.length < FRIEND_LIMIT) rememberInvite(team.trainer.id); }, [team.trainer.id, team.members.length]);
   const navigate = useNavigate();
   const { trainer, members } = team;
   const [name, setName] = useState('');
@@ -251,7 +254,7 @@ function TeamInvite({ team }: { team: TeamData }) {
   const full = members.length >= FRIEND_LIMIT;
   // 초대받은 사람은 세 갈래예요.
   // 내 도감이 있으면: 내 트레이너 이름과 포켓몬으로 버튼 한 번에 등록해요(이름을 다시 쓰지 않아요).
-  // 도감은 없고 결과만 있으면: 내 도감을 만들면서 그 이름과 포켓몬으로 등록해요.
+  // 도감은 없고 결과만 있으면: 이름만 남기고 그 포켓몬으로 바로 등록해요(내 도감은 등록 뒤에 권해요).
   // 둘 다 없으면: 이름을 남기고 테스트한 뒤 등록해요.
   const myCode = myTeamCode();
   const [myTrainer, setMyTrainer] = useState<{ name: string; answers: string } | null | undefined>(myCode ? undefined : null);
@@ -267,6 +270,11 @@ function TeamInvite({ team }: { team: TeamData }) {
   const joinAsTrainer = () => {
     if (!myTrainer) return;
     setPendingJoin(trainer.id, myTrainer.name); navigate(`/t/${trainer.id}/joined?a=${myTrainer.answers}`);
+  };
+  const joinWithSaved = (event: FormEvent) => {
+    event.preventDefault();
+    if (!trimmed || !done) return;
+    setPendingJoin(trainer.id, trimmed); navigate(`/t/${trainer.id}/joined?a=${done.join('')}`);
   };
   const startQuiz = (event: FormEvent) => {
     event.preventDefault();
@@ -290,10 +298,14 @@ function TeamInvite({ team }: { team: TeamData }) {
           <p className="tm-join-note">내 트레이너로 등록되고, {trainer.name} 트레이너도 내 도감에 들어와요</p>
         </div>
       ) : done && myPokemon ? (
-        <div className="tm-actions">
-          <Link className="poster-button tm-wide" to={`/trainer/new?a=${done.join('')}&join=${encodeURIComponent(trainer.id)}`}>내 도감 만들고 등록하기 <ArrowRight size={22} strokeWidth={2.6} aria-hidden="true" /></Link>
-          <p className="tm-join-note">내 도감을 만들면 {toward(myPokemon.name)} 등록되고, {trainer.name} 트레이너도 내 도감에 들어와요</p>
-        </div>
+        <form onSubmit={joinWithSaved}>
+          <label className="tm-field">
+            <span>도감에 남길 이름</span>
+            <input value={name} maxLength={12} onChange={event => setName(event.target.value)} placeholder="예: 하은" autoComplete="nickname" />
+            <small>이미 해 본 테스트 결과로 바로 등록돼요</small>
+          </label>
+          <button className="poster-button tm-wide" disabled={!trimmed}>{toward(myPokemon.name)} 등록하기 <ArrowRight size={22} strokeWidth={2.6} aria-hidden="true" /></button>
+        </form>
       ) : (
         <form onSubmit={startQuiz}>
           <label className="tm-field">

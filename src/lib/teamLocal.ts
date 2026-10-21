@@ -52,13 +52,20 @@ export function forgetTeam(code: string) { try { if (localStorage.getItem(MY_TEA
 // 초대장에서 이름을 적고 테스트로 넘어간 동안, 어느 도감에 등록할지 기억해 둡니다.
 const PENDING_JOIN = 'poketwin:pending-join';
 export function setPendingJoin(code: string, name: string) { try { localStorage.setItem(PENDING_JOIN, JSON.stringify({ code, name, at: Date.now() })); } catch { /* 저장소 미지원 */ } }
-// 한 시간이 지난 초대는 잊어서, 나중에 혼자 푼 테스트가 엉뚱한 도감에 들어가지 않게 합니다.
+// 하루가 지난 초대는 잊어서, 나중에 혼자 푼 테스트가 엉뚱한 도감에 들어가지 않게 합니다.
 export function readPendingJoin(): { code: string; name: string } | null {
   try {
     const value = JSON.parse(localStorage.getItem(PENDING_JOIN) || 'null') as { code?: unknown; name?: unknown; at?: unknown } | null;
     if (!value || typeof value.code !== 'string' || typeof value.name !== 'string' || typeof value.at !== 'number') return null;
-    return Date.now() - value.at < 60 * 60 * 1000 ? { code: value.code, name: value.name } : null;
+    return Date.now() - value.at < 24 * 60 * 60 * 1000 ? { code: value.code, name: value.name } : null;
   } catch { return null; }
+}
+// 초대장을 열기만 해도 어느 도감에서 왔는지 기억해요. 이름은 비워 두고, 테스트를 마친 화면에서 받아요.
+// 같은 도감에 이름까지 남겨 뒀으면 그대로 둬요.
+export function rememberInvite(code: string) {
+  const pending = readPendingJoin();
+  if (pending?.code === code && pending.name) return;
+  setPendingJoin(code, '');
 }
 export function clearPendingJoin() { try { localStorage.removeItem(PENDING_JOIN); } catch { /* 저장소 미지원 */ } }
 

@@ -322,6 +322,8 @@
 .tm-full { margin-top: 22px; }
 .tm-full p { font-size: 15px; line-height: 1.7; color: #33453c; }
 .tm-join-note { font-size: 13px; line-height: 1.6; text-align: center; color: var(--muted); }
+/* 이름만 받는 등록 화면: 등록 버튼 아래 '등록하지 않고 결과 보기' */
+.tm-joined form + .tm-actions { margin-top: 22px; }
 
 /* 합류 완료 */
 .tm-joined { text-align: center; }

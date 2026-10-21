@@ -6,7 +6,7 @@ import { trainerAvatars, type TrainerAvatar } from '../data/trainers';
 import { decodeAnswers } from '../lib/matching';
 import { questions } from '../data/questions';
 import { readAnswers } from '../lib/storage';
-import { createTeam, hasTeamSession, linkBack, myTeamCode, setPendingJoin, teamEnabled, TeamError } from '../lib/team';
+import { createTeam, hasTeamSession, linkBack, myTeamCode, teamEnabled, TeamError } from '../lib/team';
 import { LostPage } from '../components/LostPage';
 import { track } from '../lib/analytics';
 import './Team.css';
@@ -16,8 +16,6 @@ export function TrainerNew() {
   const [params] = useSearchParams();
   const saved = readAnswers();
   const answers = decodeAnswers(params.get('a')) ?? (saved.length === questions.length ? saved : null);
-  // 친구 초대장에서 왔으면(join) 도감을 만든 뒤 그 친구 도감에도 같은 이름과 포켓몬으로 바로 등록해요.
-  const joinCode = params.get('join');
   const [avatar, setAvatar] = useState<TrainerAvatar>('red');
   // 내 도감 없이 익명 로그인 기록만 있으면 친구 도감에 먼저 등록했던 사람이에요(바이럴 계수 계산용).
   const [joinedBefore] = useState(() => hasTeamSession() && !myTeamCode());
@@ -33,7 +31,6 @@ export function TrainerNew() {
       <p className="tm-sub">도감은 한 사람에 하나씩이에요. 새 친구들은 내 도감 초대 링크로 모아보세요.</p>
       <div className="tm-actions">
         <Link className="poster-button tm-wide" to={`/t/${existing}`}>내 도감 보러 가기 <ArrowRight size={22} strokeWidth={2.6} aria-hidden="true" /></Link>
-        {joinCode && <Link className="tm-ghost" to={`/t/${encodeURIComponent(joinCode)}`}>초대받은 도감으로 돌아가기</Link>}
       </div>
     </section>
   );
@@ -48,8 +45,6 @@ export function TrainerNew() {
       track('dex_create', { avatar, joined_before: joinedBefore });
       // 서로 등록: 먼저 등록했던 친구 도감의 트레이너들이 새 도감에 처음부터 들어 있게 해요.
       if (joinedBefore) await linkBack().catch(() => 0);
-      // 초대장에서 왔으면 등록 화면으로 가요. 거기서 친구 도감에 등록하고, 친구 트레이너도 내 도감에 넣어요.
-      if (joinCode) { setPendingJoin(joinCode, trimmed); navigate(`/t/${encodeURIComponent(joinCode)}/joined?a=${answers.join('')}`); return; }
       navigate(`/t/${code}`);
     }
     catch (err) { setError(err instanceof TeamError ? err.message : '트레이너를 만들지 못했어요. 잠시 후 다시 시도해주세요.'); setBusy(false); }
@@ -57,7 +52,6 @@ export function TrainerNew() {
   return (
     <section className="tm">
       <h1 className="tm-title">함께할 트레이너를<br /><em>골라주세요</em></h1>
-      {joinCode && <p className="tm-sub">도감을 만들면 초대받은 친구 도감에도 이 이름으로 바로 등록돼요</p>}
       <form onSubmit={submit}>
         <fieldset className="tm-picks">
           <legend className="sr-only">트레이너</legend>
