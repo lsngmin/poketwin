@@ -26,3 +26,7 @@ export function previewFor(pathname: string, search: string): Preview | null {
   }
   return null;
 }
+
+// 개인 링크: 결과(답변값이 담긴 /result)와 도감(/t/…) 주소는 공유는 되지만 검색 결과에는 나오지 않게 해요.
+// 사이트맵에서도 빠져 있고, Worker가 이 주소의 HTML에 robots noindex를 넣어요. 링크 미리보기에는 영향이 없어요.
+export const isPrivatePath = (pathname: string) => pathname === '/result' || pathname.startsWith('/t/');

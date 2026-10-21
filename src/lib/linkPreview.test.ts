@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { previewFor } from './linkPreview';
+import { isPrivatePath, previewFor } from './linkPreview';
 
 describe('링크 미리보기', () => {
   it('결과 링크는 답변으로 계산한 포켓몬 그림과 제목을 쓴다', () => {
@@ -21,5 +21,13 @@ describe('링크 미리보기', () => {
     expect(previewFor('/t/78d1169a29/manage', '')).toBeNull();
     expect(previewFor('/t/78d1169a29/vs/trainer/x', '')).toBeNull();
     expect(previewFor('/', '')).toBeNull();
+  });
+  it('결과·도감 주소만 검색에서 숨긴다', () => {
+    expect(isPrivatePath('/result')).toBe(true);
+    expect(isPrivatePath('/t/78d1169a29')).toBe(true);
+    expect(isPrivatePath('/t/78d1169a29/manage')).toBe(true);
+    expect(isPrivatePath('/pokemon/25')).toBe(false);
+    expect(isPrivatePath('/')).toBe(false);
+    expect(isPrivatePath('/collection')).toBe(false);
   });
 });
